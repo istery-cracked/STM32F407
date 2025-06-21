@@ -39,8 +39,10 @@ hha\freertos.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h
 hha\freertos.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h
 hha\freertos.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h
 hha\freertos.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h
+hha\freertos.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
 hha\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
 hha\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/timers.h
 hha\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h
 hha\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h
 hha\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h
+hha\freertos.o: ../Core/Inc/usart.h

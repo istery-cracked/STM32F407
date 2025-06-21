@@ -23,9 +23,10 @@
 #include "main.h"
 #include "cmsis_os.h"
 
+
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "usart.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -48,6 +49,9 @@
 
 /* USER CODE END Variables */
 osThreadId defaultTaskHandle;
+osThreadId LEDTaskHandle;
+uint32_t LEDTaskBuffer[ 128 ];
+osStaticThreadDef_t LEDTaskControlBlock;
 
 /* Private function prototypes -----------------------------------------------*/
 /* USER CODE BEGIN FunctionPrototypes */
@@ -55,6 +59,7 @@ osThreadId defaultTaskHandle;
 /* USER CODE END FunctionPrototypes */
 
 void StartDefaultTask(void const * argument);
+void LEDTaskfunc(void const * argument);
 
 void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
 
@@ -105,6 +110,10 @@ void MX_FREERTOS_Init(void) {
   osThreadDef(defaultTask, StartDefaultTask, osPriorityNormal, 0, 128);
   defaultTaskHandle = osThreadCreate(osThread(defaultTask), NULL);
 
+  /* definition and creation of LEDTask */
+  osThreadStaticDef(LEDTask, LEDTaskfunc, osPriorityLow, 0, 128, LEDTaskBuffer, &LEDTaskControlBlock);
+  LEDTaskHandle = osThreadCreate(osThread(LEDTask), NULL);
+
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
   /* USER CODE END RTOS_THREADS */
@@ -127,6 +136,29 @@ void StartDefaultTask(void const * argument)
     osDelay(1);
   }
   /* USER CODE END StartDefaultTask */
+}
+
+/* USER CODE BEGIN Header_LEDTaskfunc */
+/**
+* @brief Function implementing the LEDTask thread.
+* @param argument: Not used
+* @retval None
+*/
+/* USER CODE END Header_LEDTaskfunc */
+__weak void LEDTaskfunc(void const * argument)
+{
+  /* USER CODE BEGIN LEDTaskfunc */
+  /* Infinite loop */
+  for(;;)
+  {
+    osDelay(1000); // Delay for 1000 ms (1 second)
+    // Toggle an LED (assuming an LED is connected to GPIO pin) 
+    HAL_GPIO_TogglePin(LED1_GPIO_Port, LED1_Pin); // Adjust GPIO port and pin as needed
+    // You can add more functionality here, like sending a message or updating a variable
+		HAL_UART_Transmit(&huart1, (uint8_t *)"LED Toggled\r\n", 14, HAL_MAX_DELAY); // Transmit message via UART
+    
+  }
+  /* USER CODE END LEDTaskfunc */
 }
 
 /* Private application code --------------------------------------------------*/
