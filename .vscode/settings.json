@@ -1,0 +1,9 @@
+{
+    "files.associations": {
+        "cstdint": "c",
+        "uart.h": "c",
+        "stm32f4xx_hal_uart.h": "c",
+        "usart.h": "c",
+        "stm32f4xx_hal.h": "c"
+    }
+}
