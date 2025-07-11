@@ -4,6 +4,10 @@
         "uart.h": "c",
         "stm32f4xx_hal_uart.h": "c",
         "usart.h": "c",
-        "stm32f4xx_hal.h": "c"
-    }
+        "stm32f4xx_hal.h": "c",
+        "dev_flash.h": "c",
+        "main.h": "c",
+        "spi.h": "c"
+    },
+    "C_Cpp.errorSquiggles": "enabled"
 }
